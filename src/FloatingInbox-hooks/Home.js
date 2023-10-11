@@ -59,6 +59,7 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       position: "absolute",
       top: "10px",
       textDecoration: "none",
+      color: "#000",
       left: "5px",
       background: "transparent",
       border: "none",
