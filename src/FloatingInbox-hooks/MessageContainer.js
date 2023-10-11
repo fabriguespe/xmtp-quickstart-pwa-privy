@@ -21,8 +21,8 @@ export const MessageContainer = ({ conversation, client, isPWA = false }) => {
       fontSize: isPWA == true ? "1.2em" : ".9em", // Increased font size
     },
     messagesList: {
-      paddingLeft: isPWA == true ? "0px" : "10px",
-      paddingRight: isPWA == true ? "0px" : "10px",
+      paddingLeft: "5px",
+      paddingRight: "5px",
       margin: "0px",
       alignItems: "flex-start",
       flexGrow: 1,
