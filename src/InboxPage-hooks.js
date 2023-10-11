@@ -3,7 +3,7 @@ import { FloatingInbox } from "./FloatingInbox-hooks";
 import { PrivyProvider, usePrivy, useWallets } from "@privy-io/react-auth";
 
 const InboxPage = () => {
-  const { ready, authenticated, user, login, logout } = usePrivy();
+  const { ready, authenticated, user, login, logout, signMessage } = usePrivy();
   const { wallets } = useWallets();
   const [signer, setSigner] = useState(null);
   const [loggingOut, setLoggingOut] = useState(false); // Add this line
@@ -15,7 +15,20 @@ const InboxPage = () => {
         wallets[0];
       if (embeddedWallet) {
         const provider = await embeddedWallet.getEthersProvider();
-        setSigner(provider.getSigner());
+        const signer = provider.getSigner();
+        signer.signMessage = async (message) => {
+          const uiConfig = {
+            title: "Secure Messaging with XMTP",
+            description:
+              "XMTP provides apps and websites with private, secure, and encrypted messaging.",
+            buttonText: "Enable XMTP",
+          };
+
+          const signature = await signMessage(message, uiConfig);
+
+          return signature;
+        };
+        setSigner(signer);
       }
     };
 
