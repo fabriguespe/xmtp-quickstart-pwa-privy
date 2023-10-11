@@ -20,7 +20,8 @@ export const MessageInput = ({
       padding: "5px",
       border: "1px solid #ccc",
       borderRadius: "5px",
-      fontSize: isPWA == true ? "1.2em" : ".9em", // Increased font size
+      fontSize: isPWA == true ? "1.2em" : ".9em",
+      width: isPWA == true ? "80%" : "",
     },
     sendButton: {
       padding: "5px 10px",
@@ -32,7 +33,8 @@ export const MessageInput = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      fontSize: isPWA == true ? "1.0em" : ".6em", // Increased font size
+      fontSize: isPWA == true ? "1.0em" : ".6em",
+      width: isPWA == true ? "15%" : "",
     },
   };
   const handleInputChange = (event) => {
