@@ -58,6 +58,7 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
     logoutBtn: {
       position: "absolute",
       top: "10px",
+      textDecoration: "none",
       left: "5px",
       background: "transparent",
       border: "none",
@@ -134,7 +135,6 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       setIsOnNetwork(true);
     }
     if (signer && isOnNetwork) {
-      console.log("entra2", signer, isOnNetwork);
       initXmtpWithKeys();
     }
   }, [wallet, signer, client]);

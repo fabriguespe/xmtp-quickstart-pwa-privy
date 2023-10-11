@@ -10,9 +10,9 @@ const InboxPage = () => {
 
   useEffect(() => {
     const getSigner = async () => {
-      const embeddedWallet = wallets.find(
-        (wallet) => wallet.walletClientType === "metamask"
-      );
+      const embeddedWallet =
+        wallets.find((wallet) => wallet.walletClientType === "privy") ||
+        wallets[0];
       setSigner(true);
       if (embeddedWallet) {
         const provider = await embeddedWallet.getEthersProvider();
