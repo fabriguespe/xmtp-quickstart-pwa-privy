@@ -47,7 +47,7 @@ export const ConversationContainer = ({
       padding: "10px",
       boxSizing: "border-box",
       border: "0px solid #ccc",
-      fontSize: isPWA == true ? "1.2em" : ".9em",
+      fontSize: isPWA == true ? "1em" : ".9em",
       outline: "none",
     },
   };
@@ -119,7 +119,7 @@ export const ConversationContainer = ({
         <ul style={styles.conversationList}>
           <input
             type="text"
-            placeholder="Enter a 0x wallet, ENS, or UNS address"
+            placeholder="Enter a 0x wallet or ENS address"
             value={searchTerm}
             onChange={handleSearchChange}
             style={styles.peerAddressInput}
