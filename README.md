@@ -1,101 +1,105 @@
-# XMTP React Hooks Quickstart
+# XMTP App with Privy Tutorial
 
-## Installation
+### Installation
 
 ```bash
 bun install
 bun start
 ```
 
-## Concepts
+This tutorial will guide you through the process of creating an XMTP app with Privy.
 
-Head to our docs to understand our hooks concepts with our react SDK
+### Step 1: Setup
 
-- [Get started](https://xmtp.org/docs/build/get-started?tab=rn)
-- [Authentication](https://xmtp.org/docs/build/authentication?tab=rn)
-- [Conversations](https://xmtp.org/docs/build/conversations?tab=rn)
-- [Messages](https://xmtp.org/docs/build/messages/?tab=rn)
-- [Streams](https://xmtp.org/docs/build/streams/?tab=rn)
-
-#### Troubleshooting
-
-If you get into issues with `Buffer` and `polyfills` check out the fix below:
-
-1. Install the buffer dependency.
-
-```bash
-npm i buffer
-```
-
-2. Create a new file, `polyfills.js`, in the root of your project.
-
-```tsx
-import { Buffer } from "buffer";
-
-window.Buffer = window.Buffer ?? Buffer;
-```
-
-3. Import it into your main file on the first line.
-
-- ReacJS: `index.js` or `index.tsx`
-- VueJS: `main.js`
-- NuxtJS: `app.vue`
-
-  <br/>
-
-```tsx
-//has to be on the first line of the file for it to work
-import "./polyfills";
-```
-
-4. Update config files.
-
-- Webpack: `vue.config.js` or `webpack.config.js`:
+First, you need to import the necessary libraries and components. In your index.js file, import the `PrivyProvider` from @privy-io/react-auth and wrap your main component with it.
 
 ```jsx
-const webpack = require("webpack");
+import { PrivyProvider } from "@privy-io/react-auth";
+```
 
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      new webpack.ProvidePlugin({
-        Buffer: ["buffer", "Buffer"],
-      }),
-    ],
-  },
-  transpileDependencies: true,
+```jsx
+<PrivyProvider
+appId={process.env.REACT_APP_PRIVY_APP_ID}
+onSuccess={(user) => console.log(User ${user.id} logged in!)}
+>
+<InboxPage />
+</PrivyProvider>
+```
+
+### Step 2: User Authentication
+
+In your main component, use the `usePrivy` hook to get the user's authentication status and other details.
+
+```jsx
+const { ready, authenticated, user, login, logout } = usePrivy();
+```
+
+### Step 3: Wallet Integration
+
+Use the `useWallets` hook to get the user's wallets. Then, find the embedded wallet and set it as the signer.
+
+```jsx
+useEffect(() => {
+  const getSigner = async () => {
+    const embeddedWallet =
+      wallets.find((wallet) => wallet.walletClientType === "privy") ||
+      wallets[0];
+    setSigner(true);
+    if (embeddedWallet) {
+      const provider = await embeddedWallet.getEthersProvider();
+      setSigner(provider.getSigner());
+    }
+  };
+
+  if (wallets.length > 0) {
+    getSigner();
+  }
+```
+
+### Step 4: XMTP Integration
+
+In your `Home` component, use the `useClient` hook from `@xmtp/react-sdk` to get the XMTP client.
+
+```jsx
+const { client, error, isLoading, initialize } = useClient();
+```
+
+### Step 5: Message Handling
+
+In your `MessageContainer` component, use the `useMessages` and `useSendMessage` hooks from `@xmtp/react-sdk` to get the messages and send messages.
+
+```jsx
+const { messages, isLoading } = useMessages(conversation);
+const { sendMessage } = useSendMessage();
+```
+
+### Step 6: Conversation Handling
+
+In your ListConversations component, use the useConversations and useStreamConversations hooks from @xmtp/react-sdk to get the conversations and stream new conversations.
+
+```jsx
+const { conversations } = useConversations();
+const { error } = useStreamConversations(onConversation);
+```
+
+### Step 7: Logout Handling
+
+Finally, handle the logout process by setting the isConnected state to false, wiping the keys, and removing the signer.
+
+```jsx
+const handleLogout = async () => {
+  setIsConnected(false);
+  const address = await getAddress(signer);
+  wipeKeys(address);
+  setSigner(null);
+  setIsOnNetwork(false);
+  setSelectedConversation(null);
+  localStorage.removeItem("isOnNetwork");
+  localStorage.removeItem("isConnected");
+  if (typeof onLogout === "function") {
+    onLogout();
+  }
 };
 ```
 
-- Vite: `vite.config.js`:
-
-```jsx
-import { defineConfig } from "vite";
-import { Buffer } from "buffer";
-
-export default defineConfig({
-  /**/
-  define: {
-    global: {
-      Buffer: Buffer,
-    },
-  },
-  /**/
-});
-```
-
-- NuxtJS: `nuxt.config.js`:
-
-```tsx
-export default {
-  build: {
-    extend(config, { isClient }) {
-      if (isClient) {
-        config.node = {
-          Buffer: true,
-        };
-      }
-    },
-  },
-};
-```
+That's it! You've now created an XMTP app with Privy.
