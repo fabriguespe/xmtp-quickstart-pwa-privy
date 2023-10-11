@@ -13,7 +13,6 @@ const InboxPage = () => {
       const embeddedWallet =
         wallets.find((wallet) => wallet.walletClientType === "privy") ||
         wallets[0];
-      setSigner(true);
       if (embeddedWallet) {
         const provider = await embeddedWallet.getEthersProvider();
         setSigner(provider.getSigner());
