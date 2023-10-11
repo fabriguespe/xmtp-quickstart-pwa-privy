@@ -16,7 +16,6 @@ export const NewConversation = ({ selectConversation, peerAddress }) => {
 
   const handleSendMessage = useCallback(
     async (message) => {
-      console.log(message);
       if (!message.trim()) {
         alert("Empty message");
         return;
@@ -28,7 +27,7 @@ export const NewConversation = ({ selectConversation, peerAddress }) => {
       const newConversation = await startConversation(peerAddress, message);
       selectConversation(newConversation?.cachedConversation);
     },
-    [peerAddress, startConversation, selectConversation],
+    [peerAddress, startConversation, selectConversation]
   );
 
   return (

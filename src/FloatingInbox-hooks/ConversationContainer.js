@@ -90,14 +90,12 @@ export const ConversationContainer = ({
 
   const processEthereumAddress = async (address) => {
     setPeerAddress(address);
-    console.log(address);
     if (address === client.address) {
       setMessage("No self messaging allowed");
       setCreateNew(false);
       // setCanMessage(false);
     } else {
       const canMessageStatus = await client?.canMessage(address);
-      console.log(canMessageStatus);
       if (canMessageStatus) {
         setPeerAddress(address);
         // setCanMessage(true);
@@ -143,7 +141,8 @@ export const ConversationContainer = ({
                 style={styles.createNewButton}
                 onClick={() => {
                   setSelectedConversation({ messages: [] });
-                }}>
+                }}
+              >
                 Create new conversation
               </button>
             </>

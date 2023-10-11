@@ -162,7 +162,6 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       return null;
     } catch (e) {
       console.log(e);
-      console.log("entra3");
     }
   };
 
