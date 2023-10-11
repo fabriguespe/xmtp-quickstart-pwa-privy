@@ -18,9 +18,9 @@ const InboxPage = () => {
         const signer = provider.getSigner();
         signer.signMessage = async (message) => {
           const uiConfig = {
-            title: "Secure Messaging with XMTP",
+            title: "Enable Secure Messaging with XMTP",
             description:
-              "XMTP provides apps and websites with private, secure, and encrypted messaging.",
+              "What is XMTP? XMTP provides apps and websites with private, secure, and encrypted messaging without your email or phone number. To turn on secure messaging for this app, tap the 'Enable XMTP' button.",
             buttonText: "Enable XMTP",
           };
 
