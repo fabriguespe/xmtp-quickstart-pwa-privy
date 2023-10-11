@@ -13,6 +13,7 @@ export const MessageInput = ({
       paddingLeft: "10px",
       paddingRight: "10px",
       flexWrap: "wrap",
+      paddingBottom: "10px",
     },
     messageInputField: {
       flexGrow: 1,
@@ -20,7 +21,6 @@ export const MessageInput = ({
       border: "1px solid #ccc",
       borderRadius: "5px",
       fontSize: isPWA == true ? "1.2em" : ".9em", // Increased font size
-      width: isPWA == true ? "70%" : "100%",
     },
     sendButton: {
       padding: "5px 10px",
@@ -32,7 +32,6 @@ export const MessageInput = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      width: isPWA == true ? "10%" : "100%",
       fontSize: isPWA == true ? "1.0em" : ".6em", // Increased font size
     },
   };
@@ -60,7 +59,8 @@ export const MessageInput = ({
         onClick={() => {
           onSendMessage(newMessage);
           setNewMessage("");
-        }}>
+        }}
+      >
         {isPWA ? "📤" : "Send"}
       </button>
     </div>

@@ -109,15 +109,7 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       border: "1px solid grey",
       padding: isPWA == true ? "20px" : "10px",
       borderRadius: "5px",
-      fontSize: isPWA == true ? "20px" : "14px", // Increased font size
-    },
-    widgetFooter: {
-      padding: "5px",
-      fontSize: isPWA == true ? "20px" : "12px",
-      textAlign: "center",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      fontSize: isPWA == true ? "20px" : "14px",
     },
   };
 
