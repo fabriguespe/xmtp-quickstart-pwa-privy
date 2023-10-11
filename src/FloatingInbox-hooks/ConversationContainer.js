@@ -44,10 +44,11 @@ export const ConversationContainer = ({
     },
     peerAddressInput: {
       width: "100%",
-      padding: "10px", // <-- Add this line
+      padding: "10px",
       boxSizing: "border-box",
       border: "0px solid #ccc",
-      fontSize: isPWA == true ? "1.2em" : ".9em", // Increased font size
+      fontSize: isPWA == true ? "1.2em" : ".9em",
+      outline: "none",
     },
   };
   const isValidEthereumAddress = (address) => {
