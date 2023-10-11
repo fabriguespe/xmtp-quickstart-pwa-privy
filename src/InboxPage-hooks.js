@@ -33,7 +33,7 @@ const InboxPage = () => {
   const isPWA = true;
   const styles = {
     uContainer: {
-      height: "100vh",
+      height: "100vh !important;",
       backgroundColor: "#f9f9f9",
       borderRadius: isPWA == true ? "0px" : "10px",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
