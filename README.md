@@ -1,4 +1,4 @@
-# XMTP App with Privy Tutorial
+# XMTP PWA with Privy Tutorial
 
 ### Installation
 
