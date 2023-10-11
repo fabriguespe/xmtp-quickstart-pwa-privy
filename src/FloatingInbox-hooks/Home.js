@@ -46,9 +46,9 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       right: isPWA == true ? "0px" : "20px",
       width: isPWA == true ? "100%" : "300px",
       height: isPWA == true ? "100vh" : "400px",
-      border: "1px solid #ccc",
+      border: isPWA == true ? "0px" : "1px solid #ccc",
       backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
+      borderRadius: isPWA == true ? "0px" : "10px",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       zIndex: "1000",
       overflow: "hidden",
@@ -61,7 +61,7 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       left: "5px",
       background: "transparent",
       border: "none",
-      fontSize: isPWA == true ? "20px" : "10px",
+      fontSize: isPWA == true ? "12px" : "10px",
       cursor: "pointer",
     },
     widgetHeader: {
@@ -113,11 +113,6 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
       padding: "5px",
       fontSize: isPWA == true ? "20px" : "12px",
       textAlign: "center",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    powered: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -281,11 +276,6 @@ export default function Home({ wallet, env, isPWA = false, onLogout }) {
               />
             )}
           </div>
-          <div style={styles.widgetFooter}>
-            <span className="powered" style={styles.powered}>
-              Powered by <SVGLogo parentClass="powered" /> XMTP
-            </span>
-          </div>
         </div>
       )}
     </>
@@ -308,11 +298,6 @@ function SVGLogo({ parentClass, size, theme }) {
     logo: `
         .${uniqueClassLogo} {
           transition: transform 0.5s ease;
-        }
-        .powered .logo{
-          width:12px !important;
-          margin-left:2px;
-          margin-right:2px;
         }
         .${parentClass}:hover .${uniqueClassLogo} {
           transform: rotate(360deg);

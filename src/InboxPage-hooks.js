@@ -34,14 +34,9 @@ const InboxPage = () => {
   const isPWA = true;
   const styles = {
     uContainer: {
-      position: isPWA == true ? "relative" : "fixed",
-      bottom: isPWA == true ? "0px" : "70px",
-      right: isPWA == true ? "0px" : "20px",
-      width: isPWA == true ? "100%" : "300px",
-      height: isPWA == true ? "100vh" : "400px",
-      border: "1px solid #ccc",
+      height: "100vh",
       backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
+      borderRadius: isPWA == true ? "0px" : "10px",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       zIndex: "1000",
       overflow: "hidden",
