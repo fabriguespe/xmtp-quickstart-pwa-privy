@@ -18,7 +18,7 @@ export const MessageContainer = ({ conversation, client, isPWA = false }) => {
       flexDirection: "column",
       justifyContent: "space-between",
       height: "100%",
-      fontSize: isPWA == true ? "1.2em" : ".9em", // Increased font size
+      fontSize: isPWA == true ? "1.2em" : ".9em",
     },
     messagesList: {
       paddingLeft: "5px",
