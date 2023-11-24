@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@privy-io/react-auth": "^1.43.2",
-    "@xmtp/react-sdk": "^2.2.6",
+    "@xmtp/react-sdk": "latest",
     "axios": "^1.5.0",
     "buffer": "^6.0.3",
     "ethers": "^5.7.0",

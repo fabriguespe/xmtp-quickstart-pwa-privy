@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useConversations, useStreamConversations } from "@xmtp/react-sdk";
 
 export const ListConversations = ({
@@ -64,9 +64,13 @@ export const ListConversations = ({
         .includes(searchTerm.toLowerCase()) &&
       conversation?.peerAddress !== client.address
   );
-  if (filteredConversations.length > 0) {
-    onConversationFound(true);
-  }
+
+  useEffect(() => {
+    if (filteredConversations.length > 0) {
+      onConversationFound(true);
+    }
+  }, [filteredConversations, onConversationFound]);
+
   const onConversation = useCallback((conversation: Conversation) => {
     setStreamedConversations((prev) => [...prev, conversation]);
   }, []);

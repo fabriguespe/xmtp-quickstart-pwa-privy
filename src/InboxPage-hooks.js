@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FloatingInbox } from "./FloatingInbox-hooks";
-import { PrivyProvider, usePrivy, useWallets } from "@privy-io/react-auth";
-
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { ethers } from "ethers";
 const InboxPage = () => {
   const { ready, authenticated, user, login, logout, signMessage } = usePrivy();
   const { wallets } = useWallets();
@@ -13,7 +13,8 @@ const InboxPage = () => {
       const embeddedWallet =
         wallets.find((wallet) => wallet.walletClientType === "privy") ||
         wallets[0];
-      if (embeddedWallet) {
+      if (embeddedWallet.walletClientType === "privy") {
+        // Works with social
         const provider = await embeddedWallet.getEthersProvider();
         const signer = provider.getSigner();
         signer.signMessage = async (message) => {
@@ -29,6 +30,16 @@ const InboxPage = () => {
           return signature;
         };
         setSigner(signer);
+      } else if (typeof window.ethereum !== "undefined") {
+        try {
+          await window.ethereum.enable();
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          setSigner(provider.getSigner());
+        } catch (error) {
+          console.error("User rejected request", error);
+        }
+      } else {
+        console.error("Metamask not found");
       }
     };
 
