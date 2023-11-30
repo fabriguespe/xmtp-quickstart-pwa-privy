@@ -30,7 +30,7 @@ const InboxPage = () => {
           return signature;
         };
         setSigner(signer);
-      } else if (typeof window.ethereum !== "undefined") {
+      } else if (typeof window.ethereum !== undefined) {
         try {
           await window.ethereum.enable();
           const provider = new ethers.providers.Web3Provider(window.ethereum);
